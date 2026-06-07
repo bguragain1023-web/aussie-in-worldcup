@@ -3,6 +3,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import { connectDB } from './config/db.js';
 
 
 
@@ -25,8 +26,7 @@ app.get("/", (req , res) =>{
 
 const start = async () =>{
     try {
-        await mongoose.connect(process.env.MONGO_URI)
-        console.log("mongodb connected")
+        await connectDB()
 
         app.listen(port, () => {
             console.log(`server running on port ${port}`)
