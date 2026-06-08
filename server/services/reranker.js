@@ -13,17 +13,24 @@ export const rerank = async(question, chunks) => {
                 max_tokens: 100,
                 messages:[{
                     role:"user",
-                    content: `Given this question: ${question} and this chunk of text: ${chunk}, how relevant is the chunk to the question on a scale of 1 to 10? Only respond with the number.`
+                    content: `Given this question: ${question} and this chunk of text: ${chunk.text}, how relevant is the chunk to the question on a scale of 1 to 10? Only respond with the number, nothing else.`
                 }]
                
             })
 
-            const relevanceScore = await  response.json();
-            scored.push({ chunk, score: parseInt(relevanceScore.content[0].text.trim()) });
+            const score = parseInt(response.content[0].text.trim());
+            scored.push({ ...chunk, rerankScore:score });
 
 
             
         };
+
+        const reranked = scored.sort((a,b) => b.rerankScore - a.rerankScore);
+        reranked.forEach((r,i)=>{
+            console.log(`Rank ${i+1} : score ${r.rerankScore} - ${r.text.slice(0,60)}`)
+        })
+
+        return reranked;
         
     } catch (error) {
             console.error("Error reranking chunks:", error);
