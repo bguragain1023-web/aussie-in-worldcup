@@ -1,0 +1,84 @@
+
+
+
+
+
+/* ---------------------- NAVBAR ---------------------- */
+
+.navbar{
+  background: linear-gradient(rgba(255, 255, 0, 0.919), #006831);
+  padding: 10px;
+  position:sticky;
+
+}
+.logo{
+  height:70px;
+  width:130px;
+  border: 3px solid green;
+  border-radius:50%;
+}
+
+.navbar a{
+ color: white;
+  text-decoration: none;
+  border: 2px solid white;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.navbar a:hover{
+ background-color: white;
+  color: #00843D;
+}
+
+/* --------------------Hero------------------------ */
+
+.hero {
+  position: relative;
+  min-height: calc(100vh - 90px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #001a007a;  
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/logo.png');
+  object-fit: cover;
+  background-position: center;
+  opacity: .15;
+  z-index: 0;
+}
+
+/* ----------------chatbox------------------ */
+
+.chat-wrapper{
+  width:50%;
+  height: 70vh;
+  z-index:1;
+
+}
+.message-area{
+  height:65vh;
+  width:70%;
+  border:2px black solid;
+}
+
+.query-box{
+  width:70%;
+}
+.query-section{
+  height:60px;
+  width:100%;
+ 
+}
