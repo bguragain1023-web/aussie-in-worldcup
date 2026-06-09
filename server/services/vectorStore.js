@@ -1,4 +1,4 @@
-import { connect } from "vectordb";
+import { connect, MetricType } from "vectordb";
 
 let table = null;
 
@@ -42,8 +42,9 @@ export const saveChunks = async (chunks) => {
 export const searchChunks = async (queryVector) => {
   try {
     const topK = parseInt(process.env.TOP_K) || 20;
-    const similarity = parseFloat(process.env.MIN_SIMILARITY) || 0.75;
+    const similarity = parseFloat(process.env.MIN_SIMILARITY) || 0.15;
     const results = await table.search(queryVector).limit(topK).execute();
+
     const filteredResult = results.filter((result) => {
       const sim = 1 - result._distance;
       return sim >= similarity;
