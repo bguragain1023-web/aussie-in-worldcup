@@ -2,8 +2,10 @@
 
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose";
 import { connectDB } from "./config/db.js";
+import { connectVectorDB } from "./services/vectorStore.js";
+import adminRoutes from "./routes/admin.js";
+import queryRoutes from "./routes/query.js";
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -12,6 +14,11 @@ const port = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(express.json());
+
+//routes
+
+app.use("/api/admin", adminRoutes);
+app.use("/api/query", queryRoutes);
 
 //test route
 
@@ -24,6 +31,7 @@ app.get("/", (req, res) => {
 const start = async () => {
   try {
     await connectDB();
+    await connectVectorDB();
 
     app.listen(port, () => {
       console.log(`server running on port ${port}`);
