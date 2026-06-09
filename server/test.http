@@ -1,3 +1,40 @@
 
+baseUrl = http://localhost:8000
+
 ### Test server
 GET http://localhost:8000
+
+
+### Upload a document (admin)
+POST http://localhost:8000/api/admin/upload
+Content-Type: application/json
+x-admin-password: xxxxxxxx
+
+{
+  "title": "Mathew Ryan — Player Report",
+  "type": "player",
+  "content": "Mathew Ryan is Australia's first choice goalkeeper.\nHe plays for Real Sociedad in La Liga and is one of the most experienced players in the Socceroos squad.\n\nHis shot stopping is excellent. Strong in one on one situations.\nGood with his feet for a keeper which suits Australia's build up play.\n\nWeakness is dealing with crosses in crowded boxes.\nCan be indecisive when coming off his line under pressure."
+}
+
+### Get all documents (admin)
+GET http://localhost:8000/api/admin/documents
+x-admin-password: socceroos2026
+
+### Query (public)
+POST http://localhost:8000/api/query
+Content-Type: application/json
+
+{
+  "question": "What are Mathew Ryan's weaknesses?"
+}
+
+### Test wrong password
+POST http://localhost:8000/api/admin/upload
+Content-Type: application/json
+x-admin-password: wrongpassword
+
+{
+  "title": "Test",
+  "type": "player",
+  "content": "Test content"
+}
