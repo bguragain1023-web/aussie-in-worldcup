@@ -1,6 +1,6 @@
 import logo from "../assets/logo.png";
 
-export const Navbar = () => {
+export const Navbar = ({ onAdminClick }) => {
   return (
     <div className="navbar ">
       <div className="container">
@@ -11,7 +11,9 @@ export const Navbar = () => {
           //   style={{ height: "50px", width: "50px" }}
         />
 
-        <a href="">Admin</a>
+        <span className="admin-link" onClick={onAdminClick}>
+          Admin
+        </span>
       </div>
     </div>
   );
