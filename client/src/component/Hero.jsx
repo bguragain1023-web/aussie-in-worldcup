@@ -6,9 +6,7 @@ export const Hero = () => {
       <div className="hero">
         <div className="hero-bg"></div>
 
-        <div className="chat-wrapper">
-          <Chatbox />
-        </div>
+        <Chatbox />
       </div>
     </>
   );
