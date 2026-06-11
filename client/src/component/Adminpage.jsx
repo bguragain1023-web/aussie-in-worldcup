@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getDocuments, uploadDocs, deleteDocs } from "../api/axios";
 
 export const Adminpage = ({ onLogout, password }) => {
+  console.log("onLogout received:", typeof onLogout);
   const [form, setForm] = useState({ title: "", type: "", content: "" });
   const [allDocs, setAllDocs] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -60,9 +61,9 @@ export const Adminpage = ({ onLogout, password }) => {
         <div className="hero-bg"></div>
 
         <div className="admin-content d-flex flex-column align-items-center justify-content-center ">
-          <div className="d-flex justify-content-center align-items-center mb-4">
+          <div className="d-flex justify-content-center align-items-center mb-4 gap-4">
             <h2 className="admin-title">Admin Dashboard</h2>
-            <button className="logout-btn" onClick={onLogout}>
+            <button type="button" className="logout-btn" onClick={onLogout}>
               Logout
             </button>
           </div>

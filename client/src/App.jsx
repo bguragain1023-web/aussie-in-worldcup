@@ -29,8 +29,11 @@ function App() {
         {isAdmin ? (
           <Adminpage
             onLogout={() => {
+              console.log("LOGOUT FIRED - isAdmin before:", isAdmin);
               setIsAdmin(false);
+              setShowModal(false);
               setPassword("");
+              console.log("LOGOUT DONE");
             }}
             password={password}
           />

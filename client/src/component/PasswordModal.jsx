@@ -14,22 +14,24 @@ export const PasswordModal = ({ onSuccess, onClose }) => {
   };
 
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay d-flex flex-column justify-content-center align-items-center  ">
+      <h5>Admin Access</h5>
       <div className="modal-box">
-        <h5>Admin Access</h5>
-        <p className="modal-sub">Enter admin password to continue</p>
+        <p className="modal-sub">Enter admin password to continue :</p>
 
-        <input
-          type="password"
-          className="modal-input"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-          autoFocus
-        />
+        <div className="input-error">
+          <input
+            type="password"
+            className="modal-input"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+            autoFocus
+          />
 
-        {error && <p className="modal-error">{error}</p>}
+          {error && <p className="modal-error">{error}</p>}
+        </div>
 
         <div className="modal-buttons">
           <button className="modal-cancel" onClick={onClose}>

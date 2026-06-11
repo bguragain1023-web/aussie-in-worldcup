@@ -37,6 +37,7 @@
 /* --------------------Hero------------------------ */
 
 .hero {
+  background-color: red;
   position: relative;
   min-height: calc(100vh - 90px);
   display: flex;
@@ -164,7 +165,12 @@ transform:scale(1.2)
   min-height: 90vh;
   
 }
-.title{
+
+.admin-content{
+   z-index: 1;
+  position: relative;
+}
+.admin-title{
   font-size:2rem;
   font-weight:bold;
   color:white;
@@ -172,6 +178,14 @@ transform:scale(1.2)
 }
 
 
+.logout-btn{
+   padding:10px;
+  background:red;
+  color:white;
+  font-size: 16px;
+  width:110px;
+  border-radius:12px;
+}
 
 .admin-form-box{
   width:600px;
@@ -213,8 +227,87 @@ transform:scale(1.2)
   padding:10px;
 }
 
+/* Password Model */
+
+.modal-overlay{
+  
+  background: black;
+  color:white;
+  height:200px;
+  /* animation: appear 1s ease-in-out; */
+}
+
+@keyframes appear {
+  0%{
+    transform: translateY(-100vh); /* Starts completely off-screen at the top */
+                opacity: 0;
+
+  }
+  60%{
+    opacity: 1;
+  }
+  100%{
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+}
+
+.modal-box{
+  
+  width:100%;
+  height:150px;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  gap:1rem;
+  padding:20px;
+}
+
+.modal-sub{
+  font-size:25px;
+}
 
 
+.input-error{
+
+  height:100px;
+  width:30%;
+  padding:20px;
+  justify-content: center;
+  align-items: center;;
+}
+.modal-input{
+height:40px;
+width: 100%;
+padding:20px;
+border-radius: 13px;
+}
+
+.modal-buttons{
+ display:flex;
+ justify-content: center;
+ align-items: center;
+ gap:1rem;
+}
+.modal-cancel{
+  padding:10px;
+  background:red;
+  color:white;
+  font-size: 20px;
+  width:110px;
+  border-radius:12px;
+
+
+}
+.modal-submit{
+  padding:10px;
+  background:green;
+  color:white;
+  font-size: 20px;
+  width:110px;
+  border-radius:12px;
+}
 
 
 .footer{
