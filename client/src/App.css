@@ -204,6 +204,10 @@ transform:scale(1.2)
 
   
 }
+.form-group > label {
+  color:white;
+  font-size:20px;
+}
 
 .form-group > input, select{
   height:40px;
@@ -225,6 +229,12 @@ transform:scale(1.2)
   align-self: center;
   color:white;
   padding:10px;
+}
+h5{
+  color:white;
+  font-size:25px;
+  font-style: italic;
+
 }
 
 /* Password Model */

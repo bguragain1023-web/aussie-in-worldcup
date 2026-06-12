@@ -50,7 +50,9 @@ router.get("/documents", adminAuth, async (req, res) => {
 
 router.delete("/documents/:id", adminAuth, async (req, res) => {
   try {
-    await Document.findByIdAndDelete(req.params.id);
+    const { id } = req.params;
+    await Document.findByIdAndDelete(id);
+
     res.json({ message: "Document deleted" });
   } catch (error) {
     res.status(500).json({

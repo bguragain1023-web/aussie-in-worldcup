@@ -69,9 +69,9 @@ export const Adminpage = ({ onLogout, password }) => {
           </div>
 
           <div className="admin-form-box ">
-            <h5>upload Documents</h5>
+            <h5>Upload Documents</h5>
 
-            {message && <p className="upload-message">{message}</p>}
+            {message && <p className="upload-message text-white">{message}</p>}
             <div className="form-group">
               <label>Title</label>
               <input
@@ -136,7 +136,7 @@ export const Adminpage = ({ onLogout, password }) => {
               <th>#</th>
               <th>Title</th>
               <th>Type</th>
-              <th>Chuncks</th>
+              <th>Chunks</th>
               <th>Delete</th>
             </tr>
           </thead>
