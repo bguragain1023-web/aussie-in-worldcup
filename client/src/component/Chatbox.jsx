@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { queryAPI } from "../api/axios.js";
+import ReactMarkDown from "react-markdown";
 
 export const Chatbox = () => {
   const [input, setInput] = useState("");
@@ -20,7 +21,7 @@ export const Chatbox = () => {
       const aiMessage = {
         role: "assistant",
         content: data.responses.response,
-        source: data.responses.source,
+        sources: data.responses.source,
       };
       setMessages([...updatedMessages, aiMessage]);
     } catch (error) {
@@ -37,7 +38,7 @@ export const Chatbox = () => {
         )}
         {messages.map((msg, i) => (
           <div key={i} className={`message ${msg.role}`}>
-            <p>{msg.content}</p>
+            <ReactMarkDown>{msg.content}</ReactMarkDown>
             {msg.sources && msg.sources.length > 0 && (
               <small className="sources">source: {msg.sources.join(",")}</small>
             )}

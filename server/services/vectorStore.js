@@ -44,7 +44,7 @@ export const searchChunks = async (queryVector) => {
     }
 
     const topK = parseInt(process.env.TOP_K) || 20;
-    const similarity = parseFloat(process.env.MIN_SIMILARITY) || 0.15;
+    const similarity = parseFloat(process.env.MIN_SIMILARITY) || 0.35;
     const results = await table
       .search(queryVector)
       .metricType("cosine")

@@ -319,6 +319,33 @@ border-radius: 13px;
   border-radius:12px;
 }
 
+/* chatbox */
+
+.message.assistant h1{
+  font-size:1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.message.assistant h2{
+  font-size:1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.message.assistant h3{
+  font-size:1rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+
+.message.assistant p{
+  font-size:0.8rem;
+
+}
+.message.assistant strong{
+  font-weight: 600;
+
+}
 
 .footer{
   margin-top:20px;
