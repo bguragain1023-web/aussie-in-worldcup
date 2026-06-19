@@ -64,8 +64,8 @@
 /* ----------------chatbox------------------ */
 
 .chat-wrapper{
-  width:60%;
-  height: 70vh;
+  width:65%;
+  height: 80vh;
   z-index:1;
   padding-bottom: 20px;
    display: flex;
@@ -136,7 +136,7 @@ transform:scale(1.2)
   line-height: 1.5;
 }
 .message.user {
-  background: #00843D;
+  background: #012e169b;
   color: white;
   margin-left: auto;
   border-radius: 16px 16px 4px 16px;
@@ -188,7 +188,7 @@ transform:scale(1.2)
 }
 
 .admin-form-box{
-  width:600px;
+  width:900px;
   border:2px solid green;
     z-index: 1;
     padding:20px;
@@ -243,30 +243,21 @@ h5{
   
   background: black;
   color:white;
-  height:200px;
+  min-height:200px;
+  display:flex;
+flex-direction:column;
+justify-content: center;
+align-items: center;
   /* animation: appear 1s ease-in-out; */
+ 
 }
 
-@keyframes appear {
-  0%{
-    transform: translateY(-100vh); /* Starts completely off-screen at the top */
-                opacity: 0;
 
-  }
-  60%{
-    opacity: 1;
-  }
-  100%{
-    transform: translateY(0);
-    opacity: 1;
-  }
-  
-}
 
 .modal-box{
   
   width:100%;
-  height:150px;
+  min-height:150px;
   display:flex;
   align-items:center;
   justify-content: center;
@@ -281,7 +272,7 @@ h5{
 
 .input-error{
 
-  height:100px;
+  min-height:50px;
   width:30%;
   padding:20px;
   justify-content: center;
@@ -351,4 +342,76 @@ border-radius: 13px;
   margin-top:20px;
   padding:20px;
   background:linear-gradient(rgba(255, 255, 0, 0.919), #006831);
+}
+
+@media (max-width : 768px) {
+
+
+  .chat-wrapper{
+  width:95%;
+  height: 80vh;
+  padding-bottom: 20px;
+   display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items:center;
+  gap:10px;
+}
+.modal-overlay{
+  display:flex;
+ 
+  min-height: 150px;
+}
+
+.modal-box{
+
+  width:100%;
+ min-height: 150px;
+  flex-direction: column;
+  gap:1px;
+}
+.modal-sub{
+  font-size:20px;
+}
+.input-error{
+  height:100px;
+  width:100%;
+  padding:2px;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-cancel, .modal-submit{
+  padding:10px;
+  font-size: 16px;
+  width:90px;
+  border-radius:12px;
+}
+
+
+.admin-wrapper{
+  padding:10px;
+}
+
+.logout-btn{
+  padding:10px;
+  font-size:16px;
+  width:90px;
+}
+
+.admin-title{
+font-size:25px;
+}
+.admin-form-box{
+  width:100%;
+  border:2px solid green;
+    z-index: 1;
+    padding:20px;
+    border-radius: 12px;
+    background: #00000071;
+}
+.admin-docs-box{
+  padding:10px;
+}
+
 }

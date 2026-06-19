@@ -14,7 +14,7 @@ export const PasswordModal = ({ onSuccess, onClose }) => {
   };
 
   return (
-    <div className="modal-overlay d-flex flex-column justify-content-center align-items-center  ">
+    <div className="modal-overlay   ">
       <h5>Admin Access</h5>
       <div className="modal-box">
         <p className="modal-sub">Enter admin password to continue :</p>

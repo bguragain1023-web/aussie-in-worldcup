@@ -55,7 +55,6 @@ router.delete("/documents/:id", adminAuth, async (req, res) => {
     await Document.findByIdAndDelete(id);
 
     const cleanId = String(id).trim();
-    console.log("👉 TARGET ID TO DELETE:", cleanId);
 
     await deleteChunksByDocumentId(cleanId);
 
