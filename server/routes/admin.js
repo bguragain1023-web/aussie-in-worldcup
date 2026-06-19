@@ -2,6 +2,7 @@ import express from "express";
 import Document from "../models/documents.js";
 import { adminAuth } from "../middleware/adminAuth.js";
 import { ingestDocument } from "../services/rag.js";
+import { deleteChunksByDocumentId } from "../services/vectorStore.js";
 
 const router = express.Router();
 
@@ -53,8 +54,14 @@ router.delete("/documents/:id", adminAuth, async (req, res) => {
     const { id } = req.params;
     await Document.findByIdAndDelete(id);
 
-    res.json({ message: "Document deleted" });
+    const cleanId = String(id).trim();
+    console.log("👉 TARGET ID TO DELETE:", cleanId);
+
+    await deleteChunksByDocumentId(cleanId);
+
+    res.json({ message: "Document deleted successsfully frm both databases" });
   } catch (error) {
+    console.error("Delete route error:", error.message);
     res.status(500).json({
       message: "server error",
       error: error.message,

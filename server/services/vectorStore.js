@@ -6,7 +6,8 @@ let db = null;
 export const connectVectorDB = async () => {
   try {
     db = await connect("./lanceDB");
-
+    // run this once then remove it
+    // await db.dropTable("chunks");
     const tableNAmes = await db.tableNames();
 
     if (tableNAmes.includes("chunks")) {
@@ -78,5 +79,20 @@ export const searchChunks = async (queryVector) => {
   } catch (error) {
     console.error("Error searching chunks in vector database:", error);
     throw error;
+  }
+};
+
+export const deleteChunksByDocumentId = async (documentId) => {
+  const all = await table
+    .filter(`"documentId" IS NOT NULL`)
+    .limit(1000)
+    .execute();
+  const remaining = all.filter((r) => r.documentId !== documentId);
+
+  await db.dropTable("chunks");
+  if (remaining.length > 0) {
+    table = await db.createTable("chunks", remaining);
+  } else {
+    table = null;
   }
 };

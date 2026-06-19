@@ -21,6 +21,7 @@ export const Adminpage = ({ onLogout, password }) => {
       console.error("Error Fetching Docs", error);
     }
   };
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
