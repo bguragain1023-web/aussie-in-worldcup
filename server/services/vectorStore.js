@@ -6,8 +6,6 @@ let db = null;
 export const connectVectorDB = async () => {
   try {
     db = await connect("./lanceDB");
-    // run this once then remove it
-    // await db.dropTable("chunks");
     const tableNAmes = await db.tableNames();
 
     if (tableNAmes.includes("chunks")) {
@@ -52,17 +50,6 @@ export const searchChunks = async (queryVector) => {
       .limit(topK)
       .execute();
 
-    //temporary debug
-
-    if (results.length > 0) {
-      console.log("--- RAW DISTANCE SAMPLES FROM LANCE ---");
-      results.slice(0, 3).forEach((res, index) => {
-        console.log(
-          `Match [${index}]: Distance = ${res._distance}, Text snippet: "${res.text?.substring(0, 50)}..."`,
-        );
-      });
-    }
-
     const filteredResult = results.filter((result) => {
       const sim = 1 - result._distance;
       return sim >= similarity;
@@ -72,9 +59,6 @@ export const searchChunks = async (queryVector) => {
       `${results.length} raw chunks found, ${filteredResult.length} passed the threshold of ${similarity}`,
     );
 
-    console.log(
-      `${results.length} retrieved, ${filteredResult.length} passed similarity`,
-    );
     return filteredResult;
   } catch (error) {
     console.error("Error searching chunks in vector database:", error);

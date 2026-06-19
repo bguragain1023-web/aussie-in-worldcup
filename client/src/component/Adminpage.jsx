@@ -15,7 +15,7 @@ export const Adminpage = ({ onLogout, password }) => {
   const fetchDocs = async () => {
     try {
       const data = await getDocuments(password);
-      console.log("docs data:", data);
+
       setAllDocs(data.documents);
     } catch (error) {
       console.error("Error Fetching Docs", error);

@@ -25,7 +25,6 @@ export const ingestDocument = async (title, text, type, documentId) => {
       });
     }
     await saveChunks(chunkObject);
-    console.log(`${chunkObject.length} chunks ingested for: ${title}`);
   } catch (error) {
     console.error("Error ingesting document:", error);
     throw error;

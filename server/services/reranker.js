@@ -24,11 +24,6 @@ export const rerank = async (question, chunks) => {
     }
 
     const reranked = scored.sort((a, b) => b.rerankScore - a.rerankScore);
-    reranked.forEach((r, i) => {
-      console.log(
-        `Rank ${i + 1} : score ${r.rerankScore} - ${r.text.slice(0, 60)}`,
-      );
-    });
 
     return reranked;
   } catch (error) {

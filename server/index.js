@@ -10,7 +10,7 @@ import queryRoutes from "./routes/query.js";
 const app = express();
 const port = process.env.PORT || 8000;
 
-//moddleware
+//middleware
 
 app.use(cors());
 app.use(express.json());
@@ -19,12 +19,6 @@ app.use(express.json());
 
 app.use("/api/admin", adminRoutes);
 app.use("/api/query", queryRoutes);
-
-//test route
-
-app.get("/", (req, res) => {
-  res.json({ message: "AussIe in the worldcup API is running" });
-});
 
 //mongoose connection
 
