@@ -1,4 +1,4 @@
-# 🦘 Aussie In WorldCup
+# 🦘 AussIe In WorldCup
 
 An AI-powered RAG (Retrieval-Augmented Generation) chatbot about the Australian Socceroos at the 2026 FIFA World Cup. Ask anything about the squad, fixtures, history, tactics, and opponents — and get accurate, context-aware answers powered by real data.
 
@@ -180,7 +180,7 @@ The admin panel allows you to upload and manage documents that power the chatbot
 
 ## 🌏 About the Socceroos at 2026
 
-Australia are competing in **Group D** of the 2026 FIFA World Cup alongside co-hosts USA, Turkey, and Paraguay. Under new head coach **Tony Popovic**, the squad features 17 first-time World Cup participants alongside veterans like Mat Ryan, Mathew Leckie, and captain Jackson Irvine.
+Australia are competing in **Group D** of the 2026 FIFA World Cup alongside co-hosts USA, Turkey, and Paraguay. Under new head coach **Tony Popovic**, the squad features 17 first-time World Cup participants alongside veterans like Mat Ryan, Mathew Leckie, and Jackson Irvine.
 
 ## 👨‍💻 Author
 
