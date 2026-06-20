@@ -1,16 +1,11 @@
 import { useState } from "react";
 
-export const PasswordModal = ({ onSuccess, onClose }) => {
+export const PasswordModal = ({ onSuccess, onClose, onError }) => {
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
   const handleSubmit = () => {
-    if (password === import.meta.env.VITE_ADMIN_PASSWORD) {
-      onSuccess(password);
-    } else {
-      setError("Wrong password. Try again.");
-      setPassword("");
-    }
+    if (!password.trim()) return;
+    onSuccess(password);
   };
 
   return (
@@ -30,7 +25,7 @@ export const PasswordModal = ({ onSuccess, onClose }) => {
             autoFocus
           />
 
-          {error && <p className="modal-error">{error}</p>}
+          {onError && <p className="modal-error">{onError}</p>}
         </div>
 
         <div className="modal-buttons">
