@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --env-file=.env index.js",
-    "start": "node --env-file=.env index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.102.0",
