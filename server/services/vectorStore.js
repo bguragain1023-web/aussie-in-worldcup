@@ -5,7 +5,7 @@ let db = null;
 
 export const connectVectorDB = async () => {
   try {
-    db = await connect("./lanceDB");
+    db = await connect(process.env.LANCE_DB_PATH || "./lanceDB");
     const tableNAmes = await db.tableNames();
 
     if (tableNAmes.includes("chunks")) {
