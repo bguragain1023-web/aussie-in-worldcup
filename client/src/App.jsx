@@ -12,6 +12,7 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
+  const [isDemo, setIsDemo] = useState(false);
 
   const handleOnPasswordSubmit = async (password) => {
     try {
@@ -30,7 +31,10 @@ function App() {
   return (
     <>
       <div className="wrapper">
-        <Navbar onAdminClick={() => setShowModal(true)} />
+        <Navbar
+          onAdminClick={() => setShowModal(true)}
+          onDemoClick={() => setIsDemo(true)}
+        />
         {showModal && (
           <PasswordModal
             onSuccess={handleOnPasswordSubmit}
@@ -39,14 +43,16 @@ function App() {
           />
         )}
 
-        {isAdmin ? (
+        {isAdmin || isDemo ? (
           <Adminpage
             onLogout={() => {
               setIsAdmin(false);
+              setIsDemo(false);
               setShowModal(false);
               setPassword("");
             }}
             password={password}
+            isDemo={isDemo}
           />
         ) : (
           <Hero />

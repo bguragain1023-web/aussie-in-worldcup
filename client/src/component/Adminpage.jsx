@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getDocuments, uploadDocs, deleteDocs } from "../api/axios";
 
-export const Adminpage = ({ onLogout, password }) => {
+export const Adminpage = ({ onLogout, password, isDemo }) => {
   console.log("onLogout received:", typeof onLogout);
   const [form, setForm] = useState({ title: "", type: "", content: "" });
   const [allDocs, setAllDocs] = useState([]);
@@ -61,6 +61,12 @@ export const Adminpage = ({ onLogout, password }) => {
       <div className=" admin-wrapper">
         <div className="hero-bg"></div>
 
+        {isDemo && (
+          <div className="alert alert-warning text-center" role="alert">
+            Demo!! Read only.. Login as Admin to enable full access
+          </div>
+        )}
+
         <div className="admin-content d-flex flex-column align-items-center justify-content-center ">
           <div className="d-flex justify-content-center align-items-center mb-4 gap-4">
             <h2 className="admin-title">Admin Dashboard</h2>
@@ -83,6 +89,7 @@ export const Adminpage = ({ onLogout, password }) => {
                 placeholder="e.g Team history"
                 value={form.title}
                 onChange={handleOnChange}
+                disabled={isDemo}
               />
             </div>
 
@@ -93,6 +100,7 @@ export const Adminpage = ({ onLogout, password }) => {
                 className="form-control"
                 value={form.type}
                 onChange={handleOnChange}
+                disabled={isDemo}
               >
                 <option value="" disabled>
                   Select type...
@@ -115,13 +123,14 @@ export const Adminpage = ({ onLogout, password }) => {
                 placeholder="Type or paste scouting report here..."
                 value={form.content}
                 onChange={handleOnChange}
+                disabled={isDemo}
               />
             </div>
 
             <button
               className="upload-btn"
               onClick={handleUpload}
-              disabled={loading}
+              disabled={loading || isDemo}
             >
               {loading ? "Uploading..." : "Upload Document"}
             </button>
@@ -152,6 +161,7 @@ export const Adminpage = ({ onLogout, password }) => {
                   <button
                     className="delete-btn"
                     onClick={() => handleOnDelete(doc._id)}
+                    disabled={isDemo}
                   >
                     <i className="bi bi-trash"></i>
                   </button>
