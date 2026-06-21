@@ -16,7 +16,7 @@ export const Navbar = ({ onAdminClick, onDemoClick }) => {
             Admin
           </span>
           <span className="admin-link" onClick={onDemoClick}>
-            Demo
+            Demo-Admin
           </span>
         </div>
       </div>

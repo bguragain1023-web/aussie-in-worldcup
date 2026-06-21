@@ -47,7 +47,7 @@ export const Chatbox = () => {
 
         {loading && (
           <div className="message assistant">
-            <p>Checking Database⚽</p>
+            <p>Searching Socceroos Database...</p>
           </div>
         )}
       </div>

@@ -31,3 +31,12 @@ export const deleteDocs = async (id, password) => {
 
   return response.data;
 };
+
+export const getPublicDocs = async () => {
+  try {
+    const response = await API.get("/admin/documents/public");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching docs", error);
+  }
+};

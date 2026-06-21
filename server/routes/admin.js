@@ -49,6 +49,15 @@ router.get("/documents", adminAuth, async (req, res) => {
   }
 });
 
+router.get("/documents/public", async (req, res) => {
+  try {
+    const documents = await Document.find().select("-content");
+    res.json({ documents });
+  } catch (error) {
+    res.status(500).json({ message: "error" });
+  }
+});
+
 router.delete("/documents/:id", adminAuth, async (req, res) => {
   try {
     const { id } = req.params;

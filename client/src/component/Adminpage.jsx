@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { getDocuments, uploadDocs, deleteDocs } from "../api/axios";
+import {
+  getDocuments,
+  uploadDocs,
+  deleteDocs,
+  getPublicDocs,
+} from "../api/axios";
 
 export const Adminpage = ({ onLogout, password, isDemo }) => {
   console.log("onLogout received:", typeof onLogout);
@@ -10,7 +15,8 @@ export const Adminpage = ({ onLogout, password, isDemo }) => {
 
   useEffect(() => {
     if (password) fetchDocs();
-  }, [password]);
+    if (isDemo) fetchPublicDocs();
+  }, [password, isDemo]);
 
   const fetchDocs = async () => {
     try {
@@ -19,6 +25,15 @@ export const Adminpage = ({ onLogout, password, isDemo }) => {
       setAllDocs(data.documents);
     } catch (error) {
       console.error("Error Fetching Docs", error);
+    }
+  };
+
+  const fetchPublicDocs = async () => {
+    try {
+      const data = await getPublicDocs();
+      setAllDocs(data.documents);
+    } catch (error) {
+      console.error("Error fetching data", error);
     }
   };
 
