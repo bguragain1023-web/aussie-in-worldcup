@@ -9,7 +9,7 @@ An AI-powered RAG (Retrieval-Augmented Generation) chatbot about the Australian 
 
 ## 🚀 Live Demo
 
-Coming soon — deploying to Vercel (frontend) and Railway (backend)
+[AssIe In Worldcup](https://aussie-in-worldcup.vercel.app/)
 
 ---
 
@@ -58,8 +58,8 @@ This means the chatbot only answers from the Socceroos content that has been ing
 
 ### Deployment
 
-- Frontend → Vercel(comming soon)
-- Backend → Railway(comming soon)
+- Frontend → Vercel
+- Backend → Railway
 
 ---
 
