@@ -1,3 +1,5 @@
 node_modules
 .env
 lanceDB
+.DS_Store
+DS_Store

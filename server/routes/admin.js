@@ -9,6 +9,13 @@ const router = express.Router();
 router.post("/upload", adminAuth, async (req, res) => {
   try {
     const { title, type, content } = req.body;
+
+    if (req.role === "demo") {
+      return res.status(403).json({
+        message:
+          "Demo user cannot perform this operation, try again with admin password",
+      });
+    }
     const doc = await Document.create({
       title,
       type,
@@ -40,7 +47,7 @@ router.get("/documents", adminAuth, async (req, res) => {
   try {
     const documents = await Document.find().select("-content");
 
-    res.json({ documents });
+    res.json({ documents, role: req.role });
   } catch (error) {
     res.status(500).json({
       message: "error retrieving documents from server",
@@ -49,18 +56,16 @@ router.get("/documents", adminAuth, async (req, res) => {
   }
 });
 
-router.get("/documents/public", async (req, res) => {
-  try {
-    const documents = await Document.find().select("-content");
-    res.json({ documents });
-  } catch (error) {
-    res.status(500).json({ message: "error" });
-  }
-});
-
 router.delete("/documents/:id", adminAuth, async (req, res) => {
   try {
     const { id } = req.params;
+
+    if (req.role === "demo") {
+      return res.status(403).json({
+        message:
+          "Demo user cannot perform this operation, try again with admin password",
+      });
+    }
     await Document.findByIdAndDelete(id);
 
     const cleanId = String(id).trim();
