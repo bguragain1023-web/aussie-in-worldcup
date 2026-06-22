@@ -8,17 +8,16 @@ import { PasswordModal } from "./component/PasswordModal";
 import { getDocuments } from "./api/axios";
 
 function App() {
-  const [isAdmin, setIsAdmin] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
-  const [isDemo, setIsDemo] = useState(false);
+  const [role, setRole] = useState("");
 
   const handleOnPasswordSubmit = async (password) => {
     try {
-      await getDocuments(password);
+      const response = await getDocuments(password);
+      setRole(response.role);
       setPassword(password);
-      setIsAdmin(true);
       setShowModal(false);
       setAuthError("");
     } catch (error) {
@@ -31,10 +30,7 @@ function App() {
   return (
     <>
       <div className="wrapper">
-        <Navbar
-          onAdminClick={() => setShowModal(true)}
-          onDemoClick={() => setIsDemo(true)}
-        />
+        <Navbar onAdminClick={() => setShowModal(true)} />
         {showModal && (
           <PasswordModal
             onSuccess={handleOnPasswordSubmit}
@@ -43,16 +39,15 @@ function App() {
           />
         )}
 
-        {isAdmin || isDemo ? (
+        {role ? (
           <Adminpage
             onLogout={() => {
-              setIsAdmin(false);
-              setIsDemo(false);
+              setRole("");
               setShowModal(false);
               setPassword("");
             }}
             password={password}
-            isDemo={isDemo}
+            isDemo={role === "demo"}
           />
         ) : (
           <Hero />

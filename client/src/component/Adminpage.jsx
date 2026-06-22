@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  getDocuments,
-  uploadDocs,
-  deleteDocs,
-  getPublicDocs,
-} from "../api/axios";
+import { getDocuments, uploadDocs, deleteDocs } from "../api/axios";
 
 export const Adminpage = ({ onLogout, password, isDemo }) => {
   console.log("onLogout received:", typeof onLogout);
@@ -14,8 +9,7 @@ export const Adminpage = ({ onLogout, password, isDemo }) => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    if (password) fetchDocs();
-    if (isDemo) fetchPublicDocs();
+    if (password || isDemo) fetchDocs();
   }, [password, isDemo]);
 
   const fetchDocs = async () => {
@@ -28,15 +22,6 @@ export const Adminpage = ({ onLogout, password, isDemo }) => {
     }
   };
 
-  const fetchPublicDocs = async () => {
-    try {
-      const data = await getPublicDocs();
-      setAllDocs(data.documents);
-    } catch (error) {
-      console.error("Error fetching data", error);
-    }
-  };
-
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
@@ -44,7 +29,7 @@ export const Adminpage = ({ onLogout, password, isDemo }) => {
 
   const handleUpload = async () => {
     if (!form.title || !form.type || !form.content) {
-      setMessage("please fill in all fields");
+      setMessage("All fields are required");
       return;
     }
 
@@ -56,7 +41,11 @@ export const Adminpage = ({ onLogout, password, isDemo }) => {
       setForm({ title: "", type: "", content: "" });
       fetchDocs();
     } catch (error) {
-      console.error("something went wrong", error);
+      if (error.response?.status === 403) {
+        setMessage(error.response.data.message);
+      } else {
+        console.error("something went wrong", error);
+      }
     } finally {
       setLoading(false);
     }
@@ -67,7 +56,11 @@ export const Adminpage = ({ onLogout, password, isDemo }) => {
       await deleteDocs(id, password);
       fetchDocs();
     } catch (error) {
-      console.error("Error deleting Document", error);
+      if (error.response?.status === 403) {
+        setMessage(error.response.data.message);
+      } else {
+        console.error("something went wrong", error);
+      }
     }
   };
 
@@ -93,7 +86,6 @@ export const Adminpage = ({ onLogout, password, isDemo }) => {
           <div className="admin-form-box ">
             <h5>Upload Documents</h5>
 
-            {message && <p className="upload-message text-white">{message}</p>}
             <div className="form-group">
               <label>Title</label>
               <input
@@ -104,7 +96,6 @@ export const Adminpage = ({ onLogout, password, isDemo }) => {
                 placeholder="e.g Team history"
                 value={form.title}
                 onChange={handleOnChange}
-                disabled={isDemo}
               />
             </div>
 
@@ -115,7 +106,6 @@ export const Adminpage = ({ onLogout, password, isDemo }) => {
                 className="form-control"
                 value={form.type}
                 onChange={handleOnChange}
-                disabled={isDemo}
               >
                 <option value="" disabled>
                   Select type...
@@ -138,17 +128,28 @@ export const Adminpage = ({ onLogout, password, isDemo }) => {
                 placeholder="Type or paste scouting report here..."
                 value={form.content}
                 onChange={handleOnChange}
-                disabled={isDemo}
               />
             </div>
 
             <button
               className="upload-btn"
               onClick={handleUpload}
-              disabled={loading || isDemo}
+              disabled={loading}
             >
               {loading ? "Uploading..." : "Upload Document"}
             </button>
+            <hr />
+            {message && (
+              <p
+                className={
+                  isDemo
+                    ? "upload-message text-white fs-4 bg-danger"
+                    : "upload-message text-white text-center fs-3"
+                }
+              >
+                {message}
+              </p>
+            )}
           </div>
         </div>
       </div>
@@ -176,7 +177,6 @@ export const Adminpage = ({ onLogout, password, isDemo }) => {
                   <button
                     className="delete-btn"
                     onClick={() => handleOnDelete(doc._id)}
-                    disabled={isDemo}
                   >
                     <i className="bi bi-trash"></i>
                   </button>

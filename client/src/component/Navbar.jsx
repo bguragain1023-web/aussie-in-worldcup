@@ -1,6 +1,6 @@
 import logo from "../assets/logo.png";
 
-export const Navbar = ({ onAdminClick, onDemoClick }) => {
+export const Navbar = ({ onAdminClick }) => {
   return (
     <div className="navbar ">
       <div className="container">
@@ -14,9 +14,6 @@ export const Navbar = ({ onAdminClick, onDemoClick }) => {
         <div className="links d-flex gap-2">
           <span className="admin-link" onClick={onAdminClick}>
             Admin
-          </span>
-          <span className="admin-link" onClick={onDemoClick}>
-            Demo-Admin
           </span>
         </div>
       </div>

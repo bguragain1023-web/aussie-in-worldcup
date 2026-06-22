@@ -24,6 +24,7 @@ export const PasswordModal = ({ onSuccess, onClose, onError }) => {
             onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
             autoFocus
           />
+          <span>Demo password = worldcup2026 </span>
 
           {onError && <p className="modal-error">{onError}</p>}
         </div>

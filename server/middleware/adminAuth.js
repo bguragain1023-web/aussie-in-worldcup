@@ -7,7 +7,7 @@ export const adminAuth = (req, res, next) => {
     req.role = "admin";
     next();
   } else if (password === demoPassword) {
-    role = "demo";
+    req.role = "demo";
     next();
   } else {
     return res.status(401).json({
