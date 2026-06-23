@@ -31,18 +31,32 @@ export const ingestDocument = async (title, text, type, documentId) => {
   }
 };
 
-export const queryRAG = async (question) => {
+export const queryRAG = async (question, history = []) => {
   try {
-    const questionVector = await generateEmbeddings(question);
-
+    const lastTwoMessage = history.slice(-2);
+    const historyAndQuery =
+      lastTwoMessage.length > 0
+        ? `${lastTwoMessage.map((m) => m.content).join(" ")} ${question}`
+        : question;
+    const questionVector = await generateEmbeddings(historyAndQuery);
     const results = await searchChunks(questionVector);
+
     if (results.length === 0) {
+      const noResultResponse = await anthropic.messages.create({
+        model: "claude-sonnet-4-5",
+        max_tokens: 200,
+        system:
+          "You are a friendly football assistant. Paraphrase this message in a slightly different but friendly way each time, keep it short, always end with a football emoji: 'I couldn't find anything on that! Try asking about the Socceroos squad, fixtures, history, or tactics.'",
+
+        messages: [{ role: "user", content: "paraphrase" }],
+      });
+
       return {
-        answer:
-          "I don't have the information to answer this question. Try asking related questions to Socceroos information related to World Cup 2026.",
+        answer: noResultResponse.content[0].text.trim(),
         source: [],
       };
     }
+
     const rerankedresults = await rerank(question, results);
     const topChunk = rerankedresults.slice(0, 3);
     const context = topChunk.map((c) => c.text).join("\n");
@@ -51,8 +65,9 @@ export const queryRAG = async (question) => {
     const response = await anthropic.messages.create({
       model: "claude-sonnet-4-5",
       max_tokens: 1000,
-      system: `You are TactixAI, an expert football analyst specialising in the Australian Socceroos at the 2026 World Cup. Answer questions using ONLY the context provided below. If the context doesn't contain enough information, say "I don't have that information in my database." Never make up information. context: ${context}`,
+      system: `You are OzzyAI, a friendly and passionate Australian football expert specialising in the Socceroos at the 2026 FIFA World Cup. Answer questions using ONLY the context provided below. If the context doesn't contain enough information, respond warmly and suggest the user ask about the Socceroos squad, players, fixtures, tactics, or match results. Never make up information. context: ${context}`,
       messages: [
+        ...history,
         {
           role: "user",
           content: question,
