@@ -42,12 +42,13 @@ export const queryRAG = async (question, history = []) => {
     //testing start
     console.log("History length:", history.length);
     console.log("Enriched query:", historyAndQuery);
-    console.log("Results length:", results.length);
 
     //testing end
 
     const questionVector = await generateEmbeddings(historyAndQuery);
     const results = await searchChunks(questionVector);
+
+    console.log("Results length:", results.length); ///testing
 
     if (results.length === 0) {
       const noResultResponse = await anthropic.messages.create({
