@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   try {
-    const query = req.body.question;
-    const response = await queryRAG(query);
+    const { question, history } = req.body;
+    const response = await queryRAG(question, history);
     res.status(200).json({
       responses: {
         response: response.answer,
