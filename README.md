@@ -105,7 +105,7 @@ OPENAI_API_KEY=your_openai_api_key
 ANTHROPIC_API_KEY=your_anthropic_api_key
 ADMIN_PASSWORD=your_admin_password
 TOP_K=20
-MIN_SIMILARITY=0.35
+MIN_SIMILARITY=0.20
 ```
 
 ---
@@ -157,7 +157,7 @@ The admin panel allows you to upload and manage documents that power the chatbot
 - Click the delete button next to any document
 - This removes it from both MongoDB and LanceDB simultaneously
 
----
+## **Demo access:** Click **Admin**, enter password `worldcup2026` to explore the dashboard in read-only mode.
 
 ## 📁 Project Structure
 
@@ -180,7 +180,13 @@ The admin panel allows you to upload and manage documents that power the chatbot
 
 ## 🌏 About the Socceroos at 2026
 
-Australia are competing in **Group D** of the 2026 FIFA World Cup alongside co-hosts USA, Turkey, and Paraguay. Under new head coach **Tony Popovic**, the squad features 17 first-time World Cup participants alongside veterans like Mat Ryan, Mathew Leckie, and Jackson Irvine.
+Australia are competing in **Group D** of the 2026 FIFA World Cup alongside co-hosts USA, Turkey, and Paraguay. Under head coach **Tony Popovic**, the squad features 17 first-time World Cup participants alongside veterans like Mat Ryan, Mathew Leckie, and captain Jackson Irvine.
+
+**Results so far:**
+
+- ✅ June 14 — Australia 2-0 Turkey — Vancouver
+- ❌ June 20 — USA 2-0 Australia — Seattle
+- 🟡 June 26 — Paraguay vs Australia — Santa Clara (upcoming)
 
 ## 👨‍💻 Author
 
